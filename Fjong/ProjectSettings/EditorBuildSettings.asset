@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Lectures/Falling Blocks Lecture/FallingBlocks.unity
+    guid: 235a2760388884f4f8eb76c5274bc6dd
   m_configObjects: {}

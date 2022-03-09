@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class PlayerDamage : MonoBehaviour
 {
-    
+    public event System.Action OnPlayerDeath;
+            
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player")
-        {
-            print("Player Lost");
-            Destroy(col.gameObject);
+        if (col.gameObject.tag == "Enemy")
+        {            
+            
+            if (OnPlayerDeath != null)
+
+            {
+                OnPlayerDeath();
+            }
+
+            Destroy(gameObject);
         }
     }
 }

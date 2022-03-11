@@ -7,24 +7,37 @@ public class PlayerRedMovement : MonoBehaviour
     public float speed = 7f;
     float screenHalfHeightInWorldUnits;
 
+    Rigidbody2D playerRb;
+    float velocity;
     
+
+
+
     void Start()
     {
-        
+        playerRb = GetComponent<Rigidbody2D>();
+
         float halfPlayerHeight = transform.localScale.y / 2f;
         screenHalfHeightInWorldUnits = Camera.main.aspect * Camera.main.orthographicSize - halfPlayerHeight;
-        print(screenHalfHeightInWorldUnits);
+        // print(screenHalfHeightInWorldUnits);
         
        
+    }
+
+    private void FixedUpdate()
+    {
+        playerRb.position += Vector2.up * speed * Time.deltaTime;
     }
 
     void Update()
     {        
         float inputY = Input.GetAxisRaw("Vertical");
-        float velocity = inputY * speed;
-        transform.Translate(Vector2.up * velocity * Time.deltaTime);
+        velocity = inputY * speed;
 
-        if(transform.position.y < -screenHalfHeightInWorldUnits)
+       // transform.Translate(Vector2.up * velocity * Time.deltaTime);
+        
+
+       /* if(transform.position.y < -screenHalfHeightInWorldUnits)
         {
             transform.position = new Vector2(transform.position.x, -screenHalfHeightInWorldUnits);
             
@@ -33,6 +46,7 @@ public class PlayerRedMovement : MonoBehaviour
         {
             transform.position = new Vector2(transform.position.x, screenHalfHeightInWorldUnits);
         }
+        */
 
         
     }

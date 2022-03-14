@@ -5,27 +5,19 @@ using UnityEngine;
 public class BallForce : MonoBehaviour
 {
     Rigidbody2D myRb;
-    float randomX;
-    float randomY;
     public float maxVelocity = 10f;
-    
+
     void Start()
     {
         myRb = GetComponent<Rigidbody2D>();
-        randomX = Random.Range(10, 30);
-        randomY = Random.Range(10, 30);
-        Vector2 randomVector = new Vector2(randomX, randomY);
-        myRb.AddForce(randomVector);        
+
+        myRb.AddForce(new Vector2(Random.Range(-30, 30), Random.Range(-50, 50)));
     }
 
     private void FixedUpdate()
     {
         myRb.velocity = Vector2.ClampMagnitude(myRb.velocity, maxVelocity);
     }
-
-       
-    void Update()
-    {
-        
-    }
 }
+
+

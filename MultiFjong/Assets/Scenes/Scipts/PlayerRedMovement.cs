@@ -5,12 +5,13 @@ using UnityEngine;
 public class PlayerRedMovement : MonoBehaviour
 {
     public float speed = 7f;
+    public float rotationSpeed;
     float screenHalfHeightInWorldUnits;
+    float borderHalfHeight = 0.7f;
 
     Rigidbody2D playerRb;
-    float velocity;
-    
-
+    Vector2 direction;
+    float inputX;
 
 
     void Start()
@@ -18,36 +19,34 @@ public class PlayerRedMovement : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
 
         float halfPlayerHeight = transform.localScale.y / 2f;
-        screenHalfHeightInWorldUnits = Camera.main.aspect * Camera.main.orthographicSize - halfPlayerHeight;
-        // print(screenHalfHeightInWorldUnits);
-        
-       
+        screenHalfHeightInWorldUnits = Camera.main.orthographicSize - halfPlayerHeight - borderHalfHeight;
+
     }
 
     private void FixedUpdate()
     {
-        playerRb.position += Vector2.up * speed * Time.deltaTime;
+        playerRb.position += direction * speed * Time.deltaTime;
+        playerRb.rotation += inputX * rotationSpeed * Time.deltaTime;
+
     }
 
     void Update()
-    {        
-        float inputY = Input.GetAxisRaw("Vertical");
-        velocity = inputY * speed;
+    {
+        Vector2 inputY = new Vector2(0, Input.GetAxisRaw("Vertical"));
+        inputX = Input.GetAxisRaw("Horizontal");
+        direction = inputY.normalized;
 
-       // transform.Translate(Vector2.up * velocity * Time.deltaTime);
-        
-
-       /* if(transform.position.y < -screenHalfHeightInWorldUnits)
+        if (transform.position.y < -screenHalfHeightInWorldUnits)
         {
             transform.position = new Vector2(transform.position.x, -screenHalfHeightInWorldUnits);
-            
+
         }
         if (transform.position.y > screenHalfHeightInWorldUnits)
         {
             transform.position = new Vector2(transform.position.x, screenHalfHeightInWorldUnits);
         }
-        */
 
-        
+
+
     }
 }

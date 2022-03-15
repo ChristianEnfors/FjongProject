@@ -6,6 +6,7 @@ public class Guard : MonoBehaviour
 {
     public Transform pathHolder;
     public float speed = 7f;
+    public float distanceToWaypoint =1f;
 
     public List<Transform> wpList = new List<Transform>();
 
@@ -18,15 +19,24 @@ public class Guard : MonoBehaviour
         }
     }
 
+
     private void Update()
-    {
+    {         
         foreach (Transform waypoint in pathHolder)
         {
-            // move object to waypoint
-            Vector3 direction = (waypoint.position - transform.position).normalized;
-            transform.Translate(direction * speed * Time.deltaTime);
-            print(waypoint);
+            while (distanceToWaypoint <= 1)
+            {
+                // move object to waypoint
+                float distadistanceToWaypoint = (waypoint.position - transform.position).magnitude;
 
+                Vector3 direction = (waypoint.position - transform.position).normalized;
+                transform.Translate(direction * speed * Time.deltaTime);
+
+
+
+                print(waypoint);
+            }
+            
         }
     }
 

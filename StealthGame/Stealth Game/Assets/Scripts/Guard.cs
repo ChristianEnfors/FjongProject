@@ -21,22 +21,17 @@ public class Guard : MonoBehaviour
 
 
     private void Update()
-    {         
-        foreach (Transform waypoint in pathHolder)
+    {
+        while (distanceToWaypoint <= 1)
         {
-            while (distanceToWaypoint <= 1)
-            {
-                // move object to waypoint
-                float distadistanceToWaypoint = (waypoint.position - transform.position).magnitude;
+            // move object to waypoint               
 
-                Vector3 direction = (waypoint.position - transform.position).normalized;
-                transform.Translate(direction * speed * Time.deltaTime);
+            float distanceToWaypoint = Vector3.Distance(waypoint.position, transform.position);
 
+            Vector3 direction = (waypoint.position - transform.position).normalized;
+            transform.Translate(direction * speed * Time.deltaTime);
 
-
-                print(waypoint);
-            }
-            
+            print(waypoint);
         }
     }
 

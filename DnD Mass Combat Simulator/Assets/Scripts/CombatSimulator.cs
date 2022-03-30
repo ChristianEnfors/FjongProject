@@ -70,13 +70,13 @@ public void MassCombatSimulator()
 
     for (int i = 0; i < attackers; i++)
     {
-        int dieRoll = Random.Range(1, 20);
+        int dieRoll = Random.Range(1, 21);
 
         if (dieRoll + attackersToHit >= playerAC)
         {
             howManyHit++;
 
-            totalDMG = totalDMG + (Random.Range(1, attackDamageDie) * attackDamageDieCount);
+            totalDMG = totalDMG + (Random.Range(1, attackDamageDie + 1) * attackDamageDieCount);
             averageDamage = totalDMG / howManyHit;
         }
 

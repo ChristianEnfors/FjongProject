@@ -17,16 +17,15 @@ public class Guard : MonoBehaviour
 
     private void Start()
     {
-
         StartCoroutine(Patrol());
+
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     bool CanSeePlayer()
     {
         if (Vector3.Distance(transform.position, player.position) < 10f)
-        {
-            // vinklen mellan vector3.forward och spelaren delat på 2.
-
+        {           
             Vector3 directionToPlayer = (transform.forward - player.position).normalized;
             float angleToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
@@ -39,12 +38,12 @@ public class Guard : MonoBehaviour
         return false;
     }
     
-
-
+    
     private void Update()
     {
+        bool isPlayerVisible = CanSeePlayer();
+        print(isPlayerVisible);             
 
-        
     }
 
 

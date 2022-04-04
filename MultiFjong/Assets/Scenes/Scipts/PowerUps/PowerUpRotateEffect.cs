@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpRotate : MonoBehaviour
+public class PowerUpRotateEffect : MonoBehaviour
 {
     public float rotationSpeed;
     float rotation;

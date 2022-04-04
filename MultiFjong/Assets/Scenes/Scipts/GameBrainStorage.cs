@@ -7,8 +7,8 @@ public class GameBrainStorage : MonoBehaviour
     public int redScore = 0;
     public int blueScore = 0;
     public bool redHasPowerUp;
-    public string redActivePowerUp;
+    public string redReadyPowerUp;
     public bool blueHasPowerUp;
-    public string blueActivePowerUp;
+    public string blueReadyPowerUp;
 
 }

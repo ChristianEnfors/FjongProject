@@ -5,19 +5,35 @@ using UnityEngine;
 public class PowerUpActivation : MonoBehaviour
 {
     public GameBrainStorage gameBrainStorage;
-       
+    public GameObject redPlayer;
+    public GameObject bluePlayer;
+
     void Update()
     {
-        if(Input.GetButtonDown("Blue PowerUp Activation"))
+        if (Input.GetAxis("Blue PowerUp Activation") > 0.5)
         {
-            print("BLUE PWOER UP!");
+            if (gameBrainStorage.blueHasPowerUp)
+            {
+                if (gameBrainStorage.blueReadyPowerUp == "Enlarge")
+                {
+                    bluePlayer.transform.localScale = new Vector3(0,4,0);
+                }
+            }
+
+            else return;
         }
 
-        if (Input.GetButtonDown("Red PowerUp Activation"))
+        if (Input.GetAxis("Red PowerUp Activation") > 0.5)
         {
-            print("RED PWOER UP!");
+            if (gameBrainStorage.redHasPowerUp)
+            {
+                if (gameBrainStorage.redReadyPowerUp == "Enlarge")
+                {
+
+                }
+            }
+
+            else return;
         }
-
-
     }
 }

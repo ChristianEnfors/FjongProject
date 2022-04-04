@@ -108,14 +108,14 @@ public class GameBrain : MonoBehaviour
         if (lastHit == playerBlue)
         {
             gameBrainStorage.blueHasPowerUp = true;
-            gameBrainStorage.blueActivePowerUp = "Enlarge";
+            gameBrainStorage.blueReadyPowerUp = "Enlarge";
             bluePowerUP.color = Color.yellow;
         }
-
+        
         if (lastHit == playerRed)
         {
             gameBrainStorage.redHasPowerUp = true;
-            gameBrainStorage.redActivePowerUp = "Enlarge";
+            gameBrainStorage.redReadyPowerUp = "Enlarge";
             bluePowerUP.color = Color.yellow;
         }
     }   

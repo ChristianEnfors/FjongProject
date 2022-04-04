@@ -9,8 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public string verticalStickName;
     public string horizontalStickName;
 
-    float yMovementCap = 2.2f;
-    float borderHalfHeight = 0.7f;
+    float yMovementCap = 2.2f;    
 
     Rigidbody2D playerRb;
     Vector2 direction;

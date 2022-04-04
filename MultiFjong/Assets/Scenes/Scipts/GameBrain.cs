@@ -1,42 +1,123 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameBrain : MonoBehaviour
 {
     public TextMeshProUGUI redScoreUI;
     public TextMeshProUGUI blueScoreUI;
+    public Transform ball;
+    public BallForce ballforce;
+    public GameObject redWonUI;
+    public GameObject blueWonUI;
+    public GameObject endgamePanel;
+    public GameObject playerBlue;
+    public GameObject playerRed;
+    public Image bluePowerUP;
+    public Image redPowerUP;
 
-    int redScore = 0;
-    int blueScore = 0;
+    public GameBrainStorage gameBrainStorage;
 
-
-
-    // Update is called once per frame
-    void Update()
+    [HideInInspector] public GameObject lastHit;
+        
+    public void Update()
     {
-        if(Input.anyKeyDown)
+        if (Input.anyKeyDown)
         {
-            playerScored("Red");
+            GameOver("Red");
         }
     }
 
+    public void RestartRound()
+    {
+        ball.position = new Vector3(0, 0, 0);
 
-    public void playerScored(string player)
+        ballforce.RandomBallForce();
+
+    }
+
+
+    public void PlayerScored(string player)
     {
         if (player == "Red") //Player Red
         {
-            redScore++;
-            redScoreUI.text = redScore.ToString();
+            gameBrainStorage.redScore++;
+            redScoreUI.text = gameBrainStorage.redScore.ToString();
+
+            if (gameBrainStorage.redScore < 10)
+            {
+                RestartRound();
+            }
+
+            else GameOver("Red");
 
         }
 
         if (player == "Blue") //Player Blue
         {
-            blueScore++;
-            blueScoreUI.text = blueScoreUI.ToString();
+            gameBrainStorage.blueScore++;
+            blueScoreUI.text = gameBrainStorage.blueScore.ToString();
+
+            if (gameBrainStorage.blueScore < 10)
+            {
+                RestartRound();
+            }
+
+            else GameOver("Blue");
 
         }
     }
+
+    public void GameOver(string player)
+    {
+        if (player == "Red")
+        {
+            endgamePanel.SetActive(true);
+            redWonUI.SetActive(true);
+        }
+
+        if (player == "Blue")
+        {
+            endgamePanel.SetActive(true);
+            blueWonUI.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            RestartGame();
+        }
+    }
+
+    public void RestartGame()
+    {
+        gameBrainStorage.blueScore = 0;
+        gameBrainStorage.redScore = 0;
+        blueScoreUI.text = gameBrainStorage.blueScore.ToString();
+        redScoreUI.text = gameBrainStorage.redScore.ToString();
+        endgamePanel.SetActive(false);
+        blueWonUI.SetActive(false);
+        redWonUI.SetActive(false);
+
+        RestartRound();
+    }
+
+    public void PowerUpEnlarge()
+    {
+        if (lastHit == playerBlue)
+        {
+            gameBrainStorage.blueHasPowerUp = true;
+            gameBrainStorage.blueActivePowerUp = "Enlarge";
+            bluePowerUP.color = Color.yellow;
+        }
+
+        if (lastHit == playerRed)
+        {
+            gameBrainStorage.redHasPowerUp = true;
+            gameBrainStorage.redActivePowerUp = "Enlarge";
+            bluePowerUP.color = Color.yellow;
+        }
+    }   
+
 }

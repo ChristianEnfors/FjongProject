@@ -9,15 +9,23 @@ public class BallForce : MonoBehaviour
 
     void Start()
     {
-        myRb = GetComponent<Rigidbody2D>();
-
-        myRb.AddForce(new Vector2(Random.Range(-30, 30), Random.Range(-50, 50)));
+        RandomBallForce();
     }
 
     private void FixedUpdate()
     {
         myRb.velocity = Vector2.ClampMagnitude(myRb.velocity, maxVelocity);
     }
+
+    public void RandomBallForce()
+    {
+        myRb = GetComponent<Rigidbody2D>();
+
+        Vector2 randomForce = Random.insideUnitCircle.normalized * 4;
+        Debug.DrawLine(transform.position, randomForce, Color.red, 3);
+        myRb.AddForce(randomForce, ForceMode2D.Impulse);
+    }
+
 }
 
 

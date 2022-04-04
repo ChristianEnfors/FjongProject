@@ -6,18 +6,8 @@ public class PlayerBounce : MonoBehaviour
 {
     public Rigidbody2D ballRb;
     public float bounceEffect = 10f;
+    public GameBrain gamebrain;
     
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ball")
@@ -27,10 +17,9 @@ public class PlayerBounce : MonoBehaviour
             
             ballRb.AddForce(contactNormal * bounceEffect, ForceMode2D.Impulse);
             Debug.DrawLine(contactPoint, contactPoint + contactNormal * 2, Color.red, 2);
+            gamebrain.lastHit = gameObject;
             
         }
-
-
 
     }
 

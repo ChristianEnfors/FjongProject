@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D playerRb;
     Vector2 direction;
     float inputX;
-    Vector2 inputY;
+    float inputY;
 
 
     void Start()
@@ -23,32 +23,36 @@ public class PlayerMovement : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
 
         float halfPlayerHeight = transform.localScale.y / 2f;
-        //screenHalfHeightInWorldUnits = Camera.main.orthographicSize - halfPlayerHeight - borderHalfHeight;
     }
-        
+
     void Update()
     {
-        inputY = new Vector2(0, Input.GetAxisRaw(verticalStickName));
-        inputX = Input.GetAxisRaw(horizontalStickName);
-        direction = inputY.normalized;
+        //inputY = new Vector2(0, Input.GetAxis(verticalStickName));
 
-        if (transform.position.y < -yMovementCap)
+        inputY = Input.GetAxis(verticalStickName);
+        inputX = Input.GetAxis(horizontalStickName);
+        
         {
-            transform.position = new Vector2(transform.position.x, -yMovementCap);
+            if (transform.position.y < -yMovementCap)
+            {
+                transform.position = new Vector2(transform.position.x, -yMovementCap);
 
+            }
+            if (transform.position.y > yMovementCap)
+            {
+                transform.position = new Vector2(transform.position.x, yMovementCap);
+            }
         }
-        if (transform.position.y > yMovementCap)
-        {
-            transform.position = new Vector2(transform.position.x, yMovementCap);
-        }
-
     }
 
     private void FixedUpdate()
     {
-        playerRb.position += direction * speed * Time.deltaTime;
-        playerRb.rotation += inputX * rotationSpeed * Time.deltaTime;
+        if (Mathf.Abs(inputY) > 0.7)
+        {
+            playerRb.position += Vector2.up * inputY * speed * Time.deltaTime;
+        }
 
+        playerRb.rotation += inputX * rotationSpeed * Time.deltaTime;
     }
 
 

@@ -20,15 +20,7 @@ public class GameBrain : MonoBehaviour
 
     public GameBrainStorage gameBrainStorage;
 
-    [HideInInspector] public GameObject lastHit;
-        
-    public void Update()
-    {
-        if (Input.anyKeyDown)
-        {
-            GameOver("Red");
-        }
-    }
+    [HideInInspector] public GameObject lastHit;          
 
     public void RestartRound()
     {

@@ -20,17 +20,13 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
-
-        float halfPlayerHeight = transform.localScale.y / 2f;
     }
 
     void Update()
     {
-        //inputY = new Vector2(0, Input.GetAxis(verticalStickName));
-
         inputY = Input.GetAxis(verticalStickName);
-        inputX = Input.GetAxis(horizontalStickName);
-        
+        inputX = Input.GetAxis(horizontalStickName);        
+
         {
             if (transform.position.y < -yMovementCap)
             {
@@ -51,7 +47,13 @@ public class PlayerMovement : MonoBehaviour
             playerRb.position += Vector2.up * inputY * speed * Time.deltaTime;
         }
 
-        playerRb.rotation += inputX * rotationSpeed * Time.deltaTime;
+        // Old rotation:
+        //playerRb.rotation += inputX * rotationSpeed * Time.deltaTime;
+
+        Vector2 rotation = new Vector2(inputX, inputY).normalized;
+        float padRotation = 90 - Mathf.Atan2(inputY, inputX) * Mathf.Rad2Deg * -1;
+        print(padRotation);
+        playerRb.rotation = padRotation;
     }
 
 

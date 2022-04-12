@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BallForce : MonoBehaviour
 {
-    Rigidbody2D myRb;
-    public float maxVelocity = 10f;
-
+    public Rigidbody2D myRb;
+    public float maxVelocity;
+    
     void Start()
     {
         RandomBallForce();
@@ -16,11 +16,11 @@ public class BallForce : MonoBehaviour
     {
         myRb.velocity = Vector2.ClampMagnitude(myRb.velocity, maxVelocity);
     }
-
+       
     public void RandomBallForce()
     {
-        myRb = GetComponent<Rigidbody2D>();
-
+        myRb.velocity = new Vector2(0, 0);
+        
         Vector2 randomForce = Random.insideUnitCircle.normalized * 4;
         Debug.DrawLine(transform.position, randomForce, Color.red, 3);
         myRb.AddForce(randomForce, ForceMode2D.Impulse);

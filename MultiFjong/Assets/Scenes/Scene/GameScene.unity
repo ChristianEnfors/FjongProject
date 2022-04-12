@@ -299,6 +299,9 @@ MonoBehaviour:
   verticalStickName: Left Stick Vertical
   horizontalStickName: Left Stick Horizontal
   rotationSpeed: 10
+  playerPadAngle: 0
+  stickDirectionDegrees: 0
+  diffAngle: 0
 --- !u!114 &73368014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,9 +315,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballRb: {fileID: 2069705064}
-  bounceEffect: 1
   gamebrain: {fileID: 429161807}
+  playerMovement: {fileID: 73368013}
   playerRb: {fileID: 73368012}
+  bounceEnchancer: 0
 --- !u!1 &107938114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,10 +1076,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comment: "P\xE5 p\xE5up prefaben: skicka den bara vad som togs upp (d\xF6p det
-    till samma namn som prefaben s\xE5 \xE4r det enklekt att komma ih\xE5g). sen
+    till samma namn som prefaben s\xE5 \xE4r \ndet enklekt att komma ih\xE5g). sen
     i gamebrain s\xE5 finns en \"OnPowerupPickUp()\" som g\xF6r r\xE4tt.\n\nDetta
     g\xF6r det kanske liiite mer komplicerat men mindre code repition och enklare
-    att f\xF6lja."
+    att f\xF6lja.\n\nR\xE4kna ut bounce vid tr\xE4ff:\nHitta en funktion online som
+    \xE4r Anglewrap (obs! funkar inte vid negativ s\xE5 m\xE5ste ha en speciakl-funktion
+    d\xE5).\n\nr\xE4kna ut skillnanden i grader mellan targetAngle och playerPadAngle"
 --- !u!1 &518930878
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,9 +1307,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballRb: {fileID: 2069705064}
-  bounceEffect: 1
   gamebrain: {fileID: 429161807}
+  playerMovement: {fileID: 563450258}
   playerRb: {fileID: 563450259}
+  bounceEnchancer: 15
 --- !u!114 &563450258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1320,6 +1327,9 @@ MonoBehaviour:
   verticalStickName: Right Stick Vertical
   horizontalStickName: Right Stick Horizontal
   rotationSpeed: 10
+  playerPadAngle: 0
+  stickDirectionDegrees: 0
+  diffAngle: 0
 --- !u!50 &563450259
 Rigidbody2D:
   serializedVersion: 4
@@ -3581,7 +3591,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd156c7da6b20e4e962c871e5c4f499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 10
+  myRb: {fileID: 2069705064}
+  maxVelocity: 30
 --- !u!114 &2069705069
 MonoBehaviour:
   m_ObjectHideFlags: 0

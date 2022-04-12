@@ -15,14 +15,14 @@ public class PlayerMovement : MonoBehaviour
     float inputX;
     float inputY;
     Vector2 inputVector;
-    float playerPadAngle;
-    float stickDirectionDegrees;
-    float angleDiff;
-
+    public float playerPadAngle;
+    public float stickDirectionDegrees;
+    public float diffAngle;
 
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+
     }
 
     void Update()
@@ -31,10 +31,19 @@ public class PlayerMovement : MonoBehaviour
         inputX = Input.GetAxis(horizontalStickName);
         inputVector = new Vector2(inputX, inputY).normalized;
 
+        diffAngle = Mathf.Abs(playerPadAngle - stickDirectionDegrees);
+
+        playerPadAngle = Mathf.LerpAngle(playerPadAngle, stickDirectionDegrees, rotationSpeed * Time.deltaTime);
+
         if (inputVector.magnitude > 0)
         {
             stickDirectionDegrees = 90 - Mathf.Atan2(-inputY, inputX) * Mathf.Rad2Deg;
-            playerPadAngle = Mathf.LerpAngle(playerPadAngle, stickDirectionDegrees, Time.deltaTime * rotationSpeed);
+            if (stickDirectionDegrees < 0)
+            {
+                stickDirectionDegrees = stickDirectionDegrees + 360;
+            }
+
+            playerPadAngle = (playerPadAngle + 360) % 360;
         }
 
 
@@ -56,12 +65,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Mathf.Abs(inputY) > 0.7)
         {
-            playerRb.position += Vector2.up * inputY * speed * Time.deltaTime;           
+            playerRb.position += Vector2.up * inputY * speed * Time.deltaTime;
         }
 
         playerRb.rotation = playerPadAngle;
-                
+
     }
-
-
 }

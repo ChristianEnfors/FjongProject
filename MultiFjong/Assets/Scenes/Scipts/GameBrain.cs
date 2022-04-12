@@ -20,14 +20,12 @@ public class GameBrain : MonoBehaviour
 
     public GameBrainStorage gameBrainStorage;
 
-    [HideInInspector] public GameObject lastHit;          
+    [HideInInspector] public GameObject lastHit;
 
     public void RestartRound()
-    {
+    {       
         ball.position = new Vector3(0, 0, 0);
-
         ballforce.RandomBallForce();
-
     }
 
 
@@ -103,13 +101,13 @@ public class GameBrain : MonoBehaviour
             gameBrainStorage.blueReadyPowerUp = "Enlarge";
             bluePowerUP.color = Color.yellow;
         }
-        
+
         if (lastHit == playerRed)
         {
             gameBrainStorage.redHasPowerUp = true;
             gameBrainStorage.redReadyPowerUp = "Enlarge";
             bluePowerUP.color = Color.yellow;
         }
-    }   
+    }
 
 }

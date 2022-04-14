@@ -213,7 +213,6 @@ GameObject:
   - component: {fileID: 73368010}
   - component: {fileID: 73368012}
   - component: {fileID: 73368013}
-  - component: {fileID: 73368014}
   m_Layer: 0
   m_Name: Player Red
   m_TagString: Player
@@ -302,23 +301,6 @@ MonoBehaviour:
   playerPadAngle: 0
   stickDirectionDegrees: 0
   diffAngle: 0
---- !u!114 &73368014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73368008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb3733bc1e3ef042ba8c906bb56c376, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballRb: {fileID: 2069705064}
-  gamebrain: {fileID: 429161807}
-  playerMovement: {fileID: 73368013}
-  playerRb: {fileID: 73368012}
-  bounceEnchancer: 0
 --- !u!1 &107938114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,7 +1268,6 @@ GameObject:
   - component: {fileID: 563450260}
   - component: {fileID: 563450259}
   - component: {fileID: 563450258}
-  - component: {fileID: 563450257}
   m_Layer: 0
   m_Name: Player Blue
   m_TagString: Player
@@ -1294,23 +1275,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &563450257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 563450256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb3733bc1e3ef042ba8c906bb56c376, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballRb: {fileID: 2069705064}
-  gamebrain: {fileID: 429161807}
-  playerMovement: {fileID: 563450258}
-  playerRb: {fileID: 563450259}
-  bounceEnchancer: 15
 --- !u!114 &563450258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3490,10 +3454,10 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: 1f75737c0d6d88a4c91479540a9a448f, type: 2}
+  m_Material: {fileID: 6200000, guid: 974503501141b0c4b8bc65180f933f9b, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -3507,7 +3471,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 2069705063}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 1f75737c0d6d88a4c91479540a9a448f, type: 2}
+  m_Material: {fileID: 6200000, guid: 974503501141b0c4b8bc65180f933f9b, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -3591,8 +3555,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd156c7da6b20e4e962c871e5c4f499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myRb: {fileID: 2069705064}
-  maxVelocity: 30
+  ballRb: {fileID: 2069705064}
+  maxVelocity: 25
+  gamebrain: {fileID: 429161807}
+  swingEnchancer: 2
+  leverageEnchancer: 1
+  roundRestarted: 0
+  startDirections:
+  - {x: 1, y: 1}
+  - {x: 1, y: 0}
+  - {x: 1, y: -1}
+  - {x: -1, y: 1}
+  - {x: -1, y: 0}
+  - {x: -1, y: -1}
+  bounceEffect: 0
 --- !u!114 &2069705069
 MonoBehaviour:
   m_ObjectHideFlags: 0

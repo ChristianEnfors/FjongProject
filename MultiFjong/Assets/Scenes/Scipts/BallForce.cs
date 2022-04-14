@@ -4,27 +4,73 @@ using UnityEngine;
 
 public class BallForce : MonoBehaviour
 {
-    public Rigidbody2D myRb;
+    public Rigidbody2D ballRb;
     public float maxVelocity;
-    
+
+    public GameBrain gamebrain;
+    [Header ("Bounce Effect Enchancers")]
+    public float swingEnchancer;
+    public float leverageEnchancer;
+    [HideInInspector] public bool roundRestarted;
+
+    public Vector2[] startDirections;
+
+    public float bounceEffect;
+    bool ballCollided;
+    Vector2 contactNormal;
+    Vector2 contactPoint;
+    GameObject contactObject;
+
     void Start()
     {
-        RandomBallForce();
+        roundRestarted = true;
     }
+
 
     private void FixedUpdate()
     {
-        myRb.velocity = Vector2.ClampMagnitude(myRb.velocity, maxVelocity);
+        ballRb.velocity = Vector2.ClampMagnitude(ballRb.velocity, maxVelocity);
+
+        if (roundRestarted == true)
+        {
+            ballRb.velocity = Vector2.zero;
+            Vector2 randomStartDirection = startDirections[Random.Range(0, 6)];
+            ballRb.AddForce(randomStartDirection, ForceMode2D.Impulse);
+            roundRestarted = false;
+        }
+
+        if (ballCollided == true)
+        {
+            ballRb.AddForce(contactNormal * bounceEffect, ForceMode2D.Impulse);
+            Debug.DrawLine(contactPoint, contactPoint + contactNormal * bounceEffect, Color.red, 1);
+
+            ballCollided = false;
+        }
+
+
     }
-       
-    public void RandomBallForce()
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        myRb.velocity = new Vector2(0, 0);
-        
-        Vector2 randomForce = Random.insideUnitCircle.normalized * 4;
-        Debug.DrawLine(transform.position, randomForce, Color.red, 3);
-        myRb.AddForce(randomForce, ForceMode2D.Impulse);
+        if (collision.gameObject.tag == "Player")
+        {
+            ballCollided = true;
+            contactNormal = collision.GetContact(0).normal.normalized;
+            contactPoint = collision.GetContact(0).point;
+            contactObject = collision.gameObject;
+
+            float distancePointPivot = Vector2.Distance(contactPoint, contactObject.transform.position);
+
+            PlayerMovement playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
+            bounceEffect = ((playerMovement.diffAngle / 90) * swingEnchancer) * (distancePointPivot * leverageEnchancer);
+                        
+            gamebrain.lastHit = gameObject;
+
+        }
+
     }
+
 
 }
 

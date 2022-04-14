@@ -25,7 +25,7 @@ public class GameBrain : MonoBehaviour
     public void RestartRound()
     {       
         ball.position = new Vector3(0, 0, 0);
-        ballforce.RandomBallForce();
+        ballforce.roundRestarted = true;
     }
 
 

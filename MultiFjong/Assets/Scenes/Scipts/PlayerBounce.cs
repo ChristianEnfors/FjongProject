@@ -6,8 +6,7 @@ public class PlayerBounce : MonoBehaviour
 {
     public Rigidbody2D ballRb;    
     public GameBrain gamebrain;
-    public PlayerMovement playerMovement;
-    public Rigidbody2D playerRb;
+    public PlayerMovement playerMovement;    
     public float bounceEnchancer;
 
     float bounceEffect;

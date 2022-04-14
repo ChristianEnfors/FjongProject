@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         inputX = Input.GetAxis(horizontalStickName);
         inputVector = new Vector2(inputX, inputY).normalized;
 
-        diffAngle = Mathf.Abs(playerPadAngle - stickDirectionDegrees);
+        diffAngle = Mathf.Abs(Mathf.DeltaAngle(playerPadAngle, stickDirectionDegrees));
 
         playerPadAngle = Mathf.LerpAngle(playerPadAngle, stickDirectionDegrees, rotationSpeed * Time.deltaTime);
 

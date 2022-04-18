@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUpRotateEffect : MonoBehaviour
 {
-    public float rotationSpeed;
+    float rotationSpeed;
     float rotation;
 
     void Update()

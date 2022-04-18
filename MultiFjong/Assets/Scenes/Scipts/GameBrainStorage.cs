@@ -6,9 +6,9 @@ public class GameBrainStorage : MonoBehaviour
 {
     public int redScore = 0;
     public int blueScore = 0;
-    public bool redHasPowerUp;
-    public string redReadyPowerUp;
-    public bool blueHasPowerUp;
-    public string blueReadyPowerUp;
+    public bool redHasPowerup;
+    public string redReadyPowerup;
+    public bool blueHasPowerup;
+    public string blueReadyPowerup;
 
 }

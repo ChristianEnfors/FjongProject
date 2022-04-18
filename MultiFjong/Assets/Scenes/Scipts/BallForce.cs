@@ -87,7 +87,7 @@ public class BallForce : MonoBehaviour
             PlayerMovement playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
             bounceEffect = ((playerMovement.diffAngle / 90) * swingEnchancer) * (distancePointPivot * leverageEnchancer);
                         
-            gamebrain.lastHit = gameObject;
+            gamebrain.lastHit = contactObject;
 
         }
 

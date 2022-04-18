@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ball
-  - PowerUp
+  - GameBrain
+  - Powerup
   layers:
   - Default
   - TransparentFX

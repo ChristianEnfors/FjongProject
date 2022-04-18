@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public string horizontalStickName;
     public float rotationSpeed = 10;
 
-    float yMovementCap = 2.2f;
+    public float yMovementCap = 2.2f;
 
     Rigidbody2D playerRb;
     float inputX;

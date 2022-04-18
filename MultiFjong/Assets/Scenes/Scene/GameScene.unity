@@ -298,6 +298,7 @@ MonoBehaviour:
   verticalStickName: Left Stick Vertical
   horizontalStickName: Left Stick Horizontal
   rotationSpeed: 10
+  yMovementCap: 2.2
   playerPadAngle: 0
   stickDirectionDegrees: 0
   diffAngle: 0
@@ -1077,7 +1078,7 @@ GameObject:
   - component: {fileID: 429161810}
   m_Layer: 0
   m_Name: GameBrain
-  m_TagString: Untagged
+  m_TagString: GameBrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1108,19 +1109,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54639dd6d33c4db408066ee562adf66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redScoreUI: {fileID: 1008922677}
-  blueScoreUI: {fileID: 1514116866}
   ball: {fileID: 2069705067}
   ballforce: {fileID: 2069705068}
+  playerBlue: {fileID: 563450256}
+  playerRed: {fileID: 73368008}
+  gameBrainStorage: {fileID: 429161808}
+  lastHit: {fileID: 0}
+  bluePowerup: {fileID: 862173675}
+  redPowerup: {fileID: 654436103}
   redWonUI: {fileID: 968391217}
   blueWonUI: {fileID: 1528962049}
   endgamePanel: {fileID: 59051465}
-  playerBlue: {fileID: 563450256}
-  playerRed: {fileID: 73368008}
-  bluePowerUP: {fileID: 862173675}
-  redPowerUP: {fileID: 654436103}
-  gameBrainStorage: {fileID: 429161808}
-  lastHit: {fileID: 0}
+  redScoreUI: {fileID: 1008922677}
+  blueScoreUI: {fileID: 1514116866}
 --- !u!114 &429161808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1135,10 +1136,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   redScore: 0
   blueScore: 0
-  redHasPowerUp: 0
-  redReadyPowerUp: 
-  blueHasPowerUp: 0
-  blueReadyPowerUp: 
+  redHasPowerup: 0
+  redReadyPowerup: 
+  blueHasPowerup: 0
+  blueReadyPowerup: 
 --- !u!114 &429161809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1166,13 +1167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ea69cb96668fc43a298f2d97c5ebb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comment: "P\xE5 p\xE5up prefaben: skicka den bara vad som togs upp (d\xF6p det
-    till samma namn som prefaben s\xE5 \xE4r \ndet enklekt att komma ih\xE5g). sen
-    i gamebrain s\xE5 finns en \"OnPowerupPickUp()\" som g\xF6r r\xE4tt.\n\nDetta
-    g\xF6r det kanske liiite mer komplicerat men mindre code repition och enklare
-    att f\xF6lja.\n\nR\xE4kna ut bounce vid tr\xE4ff:\nHitta en funktion online som
-    \xE4r Anglewrap (obs! funkar inte vid negativ s\xE5 m\xE5ste ha en speciakl-funktion
-    d\xE5).\n\nr\xE4kna ut skillnanden i grader mellan targetAngle och playerPadAngle"
+  comment: "G\xF6r om powerupTimer toll en corutine som r\xE4knar ner? Just nu k\xF6rs
+    den bara en frame pga av att den inte \xE4r i update"
 --- !u!1 &518930878
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,6 +1396,7 @@ MonoBehaviour:
   verticalStickName: Right Stick Vertical
   horizontalStickName: Right Stick Horizontal
   rotationSpeed: 10
+  yMovementCap: 2.2
   playerPadAngle: 0
   stickDirectionDegrees: 0
   diffAngle: 0
@@ -2458,6 +2455,75 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1177704526
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193173, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_Name
+      value: PowerUp - SuperAim
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193174, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193174, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_Color.g
+      value: 0.13899964
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193174, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
 --- !u!1 &1328174790
 GameObject:
   m_ObjectHideFlags: 0
@@ -3897,132 +3963,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1912213984
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1912213988}
-  - component: {fileID: 1912213987}
-  - component: {fileID: 1912213986}
-  - component: {fileID: 1912213985}
-  - component: {fileID: 1912213989}
-  m_Layer: 0
-  m_Name: PowerUp - Enlarge
-  m_TagString: PowerUp
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1912213985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912213984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bf569cbe8242e742bd513111e5dd458, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!58 &1912213986
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912213984}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 1f75737c0d6d88a4c91479540a9a448f, type: 2}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
---- !u!212 &1912213987
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912213984}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.8343433, g: 1, b: 0, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!4 &1912213988
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912213984}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.53, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1912213989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912213984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 576c29a2949bbee48b5b498137b6d64e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 200
 --- !u!1 &2061825244
 GameObject:
   m_ObjectHideFlags: 0
@@ -4114,7 +4054,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.1
-  m_LinearDrag: 0.1
+  m_LinearDrag: 0.2
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 974503501141b0c4b8bc65180f933f9b, type: 2}

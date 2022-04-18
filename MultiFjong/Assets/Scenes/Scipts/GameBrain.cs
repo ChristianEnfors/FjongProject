@@ -6,24 +6,27 @@ using TMPro;
 
 public class GameBrain : MonoBehaviour
 {
-    public TextMeshProUGUI redScoreUI;
-    public TextMeshProUGUI blueScoreUI;
+    [Header("Gameplay elements")]
     public Transform ball;
     public BallForce ballforce;
+    public GameObject playerBlue;
+    public GameObject playerRed;
+    public GameBrainStorage gameBrainStorage;
+    public GameObject lastHit;
+
+    [Header("UI")]
+    public Image bluePowerup;
+    public Image redPowerup;
     public GameObject redWonUI;
     public GameObject blueWonUI;
     public GameObject endgamePanel;
-    public GameObject playerBlue;
-    public GameObject playerRed;
-    public Image bluePowerUP;
-    public Image redPowerUP;
+    public TextMeshProUGUI redScoreUI;
+    public TextMeshProUGUI blueScoreUI;
 
-    public GameBrainStorage gameBrainStorage;
 
-    [HideInInspector] public GameObject lastHit;
 
     public void RestartRound()
-    {       
+    {
         ball.position = new Vector3(0, 0, 0);
         ballforce.roundRestarted = true;
     }
@@ -93,21 +96,42 @@ public class GameBrain : MonoBehaviour
         RestartRound();
     }
 
-    public void PowerUpEnlarge()
+    public void OnPowerupPickup(string powerup)
     {
         if (lastHit == playerBlue)
         {
-            gameBrainStorage.blueHasPowerUp = true;
-            gameBrainStorage.blueReadyPowerUp = "Enlarge";
-            bluePowerUP.color = Color.yellow;
+            gameBrainStorage.blueHasPowerup = true;
+            gameBrainStorage.blueReadyPowerup = powerup;
+
+            if (powerup == "Enlarge")
+            {
+                bluePowerup.color = Color.yellow;
+            }
+
+            if (powerup == "SuperAim")
+            {
+                bluePowerup.color = Color.red;
+            }
+
         }
 
         if (lastHit == playerRed)
         {
-            gameBrainStorage.redHasPowerUp = true;
-            gameBrainStorage.redReadyPowerUp = "Enlarge";
-            bluePowerUP.color = Color.yellow;
-        }
-    }
+            gameBrainStorage.redHasPowerup = true;
+            gameBrainStorage.redReadyPowerup = powerup;
 
+            if (powerup == "Enlarge")
+            {
+                redPowerup.color = Color.yellow;
+            }
+
+            if (powerup == "SuperAim")
+            {
+                redPowerup.color = Color.red;
+            }
+        }
+
+
+
+    }
 }

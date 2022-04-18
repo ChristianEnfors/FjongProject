@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7727989901890193168}
   - component: {fileID: 7727989901890193172}
   m_Layer: 0
-  m_Name: PowerUp - Enlarge
+  m_Name: PowerUp - SuperAim
   m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,4 +125,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a43e65c84479e94e87aa911450787eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupName: Enlarge
+  powerupName: SuperAim

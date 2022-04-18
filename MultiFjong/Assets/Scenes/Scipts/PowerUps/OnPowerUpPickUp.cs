@@ -1,22 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PowerUpEnlarge : MonoBehaviour
+public class OnPowerUpPickUp : MonoBehaviour
 {
     GameBrain gamebrain;
+    public string powerupName;
 
     private void Start()
     {
-        gamebrain = FindObjectOfType<GameBrain>();
+        gamebrain = GameObject.FindGameObjectWithTag("GameBrain").GetComponent<GameBrain>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Ball")
         {
-            gamebrain.PowerUpEnlarge();
+            gamebrain.OnPowerupPickup(powerupName);
             Destroy(gameObject);
         }
     }

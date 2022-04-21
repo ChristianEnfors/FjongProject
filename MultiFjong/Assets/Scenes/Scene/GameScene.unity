@@ -1095,7 +1095,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &429161807
 MonoBehaviour:
@@ -1155,6 +1155,8 @@ MonoBehaviour:
   gameBrainStorage: {fileID: 429161808}
   redPlayer: {fileID: 73368008}
   bluePlayer: {fileID: 563450256}
+  ball: {fileID: 2069705063}
+  collisionProxy: {fileID: 2069705070}
 --- !u!114 &429161810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1167,8 +1169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ea69cb96668fc43a298f2d97c5ebb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comment: "G\xF6r om powerupTimer toll en corutine som r\xE4knar ner? Just nu k\xF6rs
-    den bara en frame pga av att den inte \xE4r i update"
+  comment: 
 --- !u!1 &518930878
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,7 +1360,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &563450256
 GameObject:
@@ -2468,11 +2469,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.07
+      value: 2.58
       objectReference: {fileID: 0}
     - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.15
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3568,7 +3569,7 @@ Transform:
   - {fileID: 1121772746}
   - {fileID: 1517846956}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1776729019
 GameObject:
@@ -4034,6 +4035,7 @@ GameObject:
   - component: {fileID: 2069705064}
   - component: {fileID: 2069705068}
   - component: {fileID: 2069705069}
+  - component: {fileID: 2069705070}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Ball
@@ -4185,3 +4187,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameBrain: {fileID: 429161807}
+--- !u!114 &2069705070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069705063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b325fccf782fcfc429b47867bcb328b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redPlayer: {fileID: 73368008}
+  bluePlayer: {fileID: 563450256}
+  powerupActivation: {fileID: 429161809}

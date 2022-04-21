@@ -7,7 +7,9 @@ public class PowerUpActivation : MonoBehaviour
     public GameBrainStorage gameBrainStorage;
     public GameObject redPlayer;
     public GameObject bluePlayer;
-    
+    public GameObject ball;
+    public CollisionProxy collisionProxy;
+
     GameObject playerWithPowerup;
 
     void Update()
@@ -19,6 +21,11 @@ public class PowerUpActivation : MonoBehaviour
                 if (gameBrainStorage.blueReadyPowerup == "Enlarge")
                 {
                     PowerupEnlarge(bluePlayer);
+                }
+
+                if (gameBrainStorage.blueReadyPowerup == "SuperAim")
+                {
+                    StartCoroutine(collisionProxy.CollisionChecker(bluePlayer));                    
                 }
             }
 
@@ -32,6 +39,11 @@ public class PowerUpActivation : MonoBehaviour
                 if (gameBrainStorage.redReadyPowerup == "Enlarge")
                 {
                     PowerupEnlarge(redPlayer);
+                }
+
+                if (gameBrainStorage.redReadyPowerup == "SuperAim")
+                {
+                    StartCoroutine(collisionProxy.CollisionChecker(redPlayer));
                 }
             }
 
@@ -63,6 +75,19 @@ public class PowerUpActivation : MonoBehaviour
 
     }
 
+    public IEnumerator PowerupSuperAim(GameObject player)
+    {
+        print("SuperAim is ready now!");
+
+       if(Input.GetAxis(player.name.TrimStart('P','l','a','y','e','r') + " PowerUp Activation") > 0.5f)
+        {
+            print("test");
+        }
+
+
+         yield return new WaitForSeconds(3f);
+    }
+
     public void PowerupReset(GameObject player)
     {
         player.transform.localScale = new Vector3(0.3f, 2, 1);
@@ -74,11 +99,12 @@ public class PowerUpActivation : MonoBehaviour
     {
         while (timer > 0)
         {
-            timer -= Time.deltaTime;            
+            timer -= Time.deltaTime;
             yield return null;
         }
 
-        PowerupReset(player);    
-       
+        PowerupReset(player);
+
     }
+
 }

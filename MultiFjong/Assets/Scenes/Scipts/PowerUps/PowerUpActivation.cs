@@ -8,13 +8,15 @@ public class PowerUpActivation : MonoBehaviour
     public GameObject redPlayer;
     public GameObject bluePlayer;
     public GameObject ball;
+    public Rigidbody2D ballRB;
     public CollisionProxy collisionProxy;
 
     GameObject playerWithPowerup;
+    bool superAimActive;
 
     void Update()
     {
-        if (Input.GetAxis("Blue PowerUp Activation") > 0.5)
+        if (Input.GetAxisRaw("Blue PowerUp Activation") > 0.5)
         {
             if (gameBrainStorage.blueHasPowerup)
             {
@@ -25,14 +27,15 @@ public class PowerUpActivation : MonoBehaviour
 
                 if (gameBrainStorage.blueReadyPowerup == "SuperAim")
                 {
-                    StartCoroutine(collisionProxy.CollisionChecker(bluePlayer));                    
+                    StartCoroutine(collisionProxy.CollisionChecker(bluePlayer));
+                    PowerupReset(bluePlayer);
                 }
             }
 
             else return;
         }
 
-        if (Input.GetAxis("Red PowerUp Activation") > 0.5)
+        if (Input.GetAxisRaw("Red PowerUp Activation") > 0.5)
         {
             if (gameBrainStorage.redHasPowerup)
             {
@@ -44,6 +47,7 @@ public class PowerUpActivation : MonoBehaviour
                 if (gameBrainStorage.redReadyPowerup == "SuperAim")
                 {
                     StartCoroutine(collisionProxy.CollisionChecker(redPlayer));
+                    PowerupReset(redPlayer);
                 }
             }
 
@@ -77,15 +81,25 @@ public class PowerUpActivation : MonoBehaviour
 
     public IEnumerator PowerupSuperAim(GameObject player)
     {
-        print("SuperAim is ready now!");
+        superAimActive = true;
+        ball.transform.SetParent(player.transform, true);      
+        ball.transform.localPosition= new Vector2(1, -0.5f);
 
-       if(Input.GetAxis(player.name.TrimStart('P','l','a','y','e','r') + " PowerUp Activation") > 0.5f)
+        bool done = false;
+
+        while (done == false)
         {
-            print("test");
+            if (Input.GetAxisRaw(player.name.Remove(0, 7) + " PowerUp Activation") > 0.5f)
+            {
+                print("SHOOT BALL!");                
+                done = true;
+                superAimActive = false;
+            }
+            
+            yield return null;
         }
 
 
-         yield return new WaitForSeconds(3f);
     }
 
     public void PowerupReset(GameObject player)
@@ -105,6 +119,15 @@ public class PowerUpActivation : MonoBehaviour
 
         PowerupReset(player);
 
+    }
+
+    public void FixedUpdate()
+    {
+        if (superAimActive == true)
+        {
+            ballRB.velocity = Vector2.zero;
+            ballRB.simulated = false;
+        }
     }
 
 }

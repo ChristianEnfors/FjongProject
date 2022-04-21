@@ -18,8 +18,8 @@ public class CollisionProxy : MonoBehaviour
         {
             while (redCollisionHit == false)
             {
-                yield return null;
                 print("waiting to hit RED player");
+                yield return null;
             }            
         }
 
@@ -27,8 +27,8 @@ public class CollisionProxy : MonoBehaviour
         {
             while (blueCollisionHit == false)
             {
-                yield return null;
                 print("waiting to hit BLUE player");
+                yield return null;
             }
 
         }
@@ -38,7 +38,7 @@ public class CollisionProxy : MonoBehaviour
     }
 
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject == redPlayer)
         {

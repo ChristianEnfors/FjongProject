@@ -1156,6 +1156,7 @@ MonoBehaviour:
   redPlayer: {fileID: 73368008}
   bluePlayer: {fileID: 563450256}
   ball: {fileID: 2069705063}
+  ballRB: {fileID: 2069705064}
   collisionProxy: {fileID: 2069705070}
 --- !u!114 &429161810
 MonoBehaviour:
@@ -2468,8 +2469,20 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.8963
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.8963
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4.8963
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.58
+      value: 3.97
       objectReference: {fileID: 0}
     - target: {fileID: 7727989901890193169, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
       propertyPath: m_LocalPosition.y

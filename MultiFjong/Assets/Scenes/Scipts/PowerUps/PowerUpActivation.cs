@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PowerUpActivation : MonoBehaviour
 {
@@ -10,9 +12,14 @@ public class PowerUpActivation : MonoBehaviour
     public GameObject ball;
     public Rigidbody2D ballRB;
     public CollisionProxy collisionProxy;
+    public GameObject lastHit;
+    public Image bluePowerup;
+    public Image redPowerup;
+    public PowerUpInstantiate powerupInstantiate;
+    public TrailRenderer ballTrail;
 
     GameObject playerWithPowerup;
-    bool superAimActive;
+    int superAimPhase;
 
     void Update()
     {
@@ -27,8 +34,7 @@ public class PowerUpActivation : MonoBehaviour
 
                 if (gameBrainStorage.blueReadyPowerup == "SuperAim")
                 {
-                    StartCoroutine(collisionProxy.CollisionChecker(bluePlayer));
-                    PowerupReset(bluePlayer);
+                    StartCoroutine(collisionProxy.CollisionChecker(bluePlayer));                    
                 }
             }
 
@@ -46,8 +52,7 @@ public class PowerUpActivation : MonoBehaviour
 
                 if (gameBrainStorage.redReadyPowerup == "SuperAim")
                 {
-                    StartCoroutine(collisionProxy.CollisionChecker(redPlayer));
-                    PowerupReset(redPlayer);
+                    StartCoroutine(collisionProxy.CollisionChecker(redPlayer));                    
                 }
             }
 
@@ -59,31 +64,22 @@ public class PowerUpActivation : MonoBehaviour
 
     public void PowerupEnlarge(GameObject player)
     {
-        StartCoroutine(PowerupTimer(3f, player));
+        StartCoroutine(PowerupTimer(6f, player));
         playerWithPowerup = player;
-        player.transform.localScale = new Vector3(0.3f, 4, 1);
+        player.transform.localScale = new Vector3(1f, 2, 1);
         PlayerMovement playermovement = player.GetComponent<PlayerMovement>();
         playermovement.yMovementCap = 0.7f;
-
-        if (player == bluePlayer)
-        {
-            gameBrainStorage.blueHasPowerup = false;
-            gameBrainStorage.blueReadyPowerup = "None";
-        }
-
-        if (player == redPlayer)
-        {
-            gameBrainStorage.redHasPowerup = false;
-            gameBrainStorage.redReadyPowerup = "None";
-        }
-
     }
 
     public IEnumerator PowerupSuperAim(GameObject player)
     {
-        superAimActive = true;
-        ball.transform.SetParent(player.transform, true);      
-        ball.transform.localPosition= new Vector2(1, -0.5f);
+        superAimPhase = 1;
+        ball.transform.SetParent(player.transform, false);
+        ball.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        ball.transform.localPosition = new Vector2(1, -0.5f);
+        SpriteRenderer superAimAim = player.transform.GetChild(4).GetComponent<SpriteRenderer>();
+        superAimAim.enabled = true;
+
 
         bool done = false;
 
@@ -91,26 +87,19 @@ public class PowerUpActivation : MonoBehaviour
         {
             if (Input.GetAxisRaw(player.name.Remove(0, 7) + " PowerUp Activation") > 0.5f)
             {
-                print("SHOOT BALL!");                
+                superAimPhase = 2;
                 done = true;
-                superAimActive = false;
+                PowerupReset(player);
             }
-            
+
             yield return null;
         }
-
-
     }
 
-    public void PowerupReset(GameObject player)
-    {
-        player.transform.localScale = new Vector3(0.3f, 2, 1);
-        PlayerMovement playermovement = player.GetComponent<PlayerMovement>();
-        playermovement.yMovementCap = 2.2f;
-    }
 
     IEnumerator PowerupTimer(float timer, GameObject player)
     {
+
         while (timer > 0)
         {
             timer -= Time.deltaTime;
@@ -121,12 +110,85 @@ public class PowerUpActivation : MonoBehaviour
 
     }
 
+    public void PowerupReset(GameObject player)
+    {
+        player.transform.localScale = new Vector3(1, 1, 1);
+        PlayerMovement playermovement = player.GetComponent<PlayerMovement>();
+        playermovement.yMovementCap = 2.2f;
+        ball.transform.parent = null;
+        SpriteRenderer superAimAim = player.transform.GetChild(4).GetComponent<SpriteRenderer>();
+        superAimAim.enabled = false;
+        powerupInstantiate.powerupOnfield = false;
+        ballTrail.startColor = Color.green;
+        ballTrail.endColor = new Color(0, 0, 0, 1);
+
+        if (player == bluePlayer)
+        {
+            gameBrainStorage.blueHasPowerup = false;
+            gameBrainStorage.blueReadyPowerup = null;
+            bluePowerup.color = Color.white;
+        }
+
+        if (player == redPlayer)
+        {
+            gameBrainStorage.redHasPowerup = false;
+            gameBrainStorage.redReadyPowerup = null;
+            redPowerup.color = Color.white;
+        }
+    }
+
+    public void OnPowerupPickup(string powerup)
+    {
+        if (lastHit == bluePlayer)
+        {
+            gameBrainStorage.blueHasPowerup = true;
+            gameBrainStorage.blueReadyPowerup = powerup;
+
+            if (powerup == "Enlarge")
+            {
+                bluePowerup.color = Color.yellow;
+            }
+
+            if (powerup == "SuperAim")
+            {
+                bluePowerup.color = Color.red;
+            }
+
+        }
+
+        if (lastHit == redPlayer)
+        {
+            gameBrainStorage.redHasPowerup = true;
+            gameBrainStorage.redReadyPowerup = powerup;
+
+            if (powerup == "Enlarge")
+            {
+                redPowerup.color = Color.yellow;
+            }
+
+            if (powerup == "SuperAim")
+            {
+                redPowerup.color = Color.red;
+            }
+        }
+
+    }
+
     public void FixedUpdate()
     {
-        if (superAimActive == true)
+        if (superAimPhase == 1)
         {
             ballRB.velocity = Vector2.zero;
             ballRB.simulated = false;
+        }
+
+        if (superAimPhase == 2)
+        {
+            ballRB.simulated = true;
+            ballRB.AddRelativeForce(new Vector2(8, 0), ForceMode2D.Impulse);
+            ballTrail.startColor = Color.red;
+            ballTrail.endColor = new Color(1, 0.6f, 0);
+            superAimPhase = 0;
         }
     }
 

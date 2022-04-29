@@ -14,9 +14,7 @@ public class GameBrain : MonoBehaviour
     public GameBrainStorage gameBrainStorage;
     public GameObject lastHit;
 
-    [Header("UI")]
-    public Image bluePowerup;
-    public Image redPowerup;
+    [Header("UI")]    
     public GameObject redWonUI;
     public GameObject blueWonUI;
     public GameObject endgamePanel;
@@ -94,44 +92,5 @@ public class GameBrain : MonoBehaviour
         redWonUI.SetActive(false);
 
         RestartRound();
-    }
-
-    public void OnPowerupPickup(string powerup)
-    {
-        if (lastHit == playerBlue)
-        {
-            gameBrainStorage.blueHasPowerup = true;
-            gameBrainStorage.blueReadyPowerup = powerup;
-
-            if (powerup == "Enlarge")
-            {
-                bluePowerup.color = Color.yellow;
-            }
-
-            if (powerup == "SuperAim")
-            {
-                bluePowerup.color = Color.red;
-            }
-
-        }
-
-        if (lastHit == playerRed)
-        {
-            gameBrainStorage.redHasPowerup = true;
-            gameBrainStorage.redReadyPowerup = powerup;
-
-            if (powerup == "Enlarge")
-            {
-                redPowerup.color = Color.yellow;
-            }
-
-            if (powerup == "SuperAim")
-            {
-                redPowerup.color = Color.red;
-            }
-        }
-
-
-
-    }
+    }    
 }

@@ -6,11 +6,11 @@ public class BallForce : MonoBehaviour
 {
     public Rigidbody2D ballRb;
     public float maxVelocity;
-    public GameBrain gamebrain;
+    public PowerUpActivation powerUpActivation;
     public Transform bluePlayer;
     public Transform redPlayer;
 
-    [Header ("Bounce Effect Enchancers")]
+    [Header("Bounce Effect Enchancers")]
     public float swingEnchancer;
     public float leverageEnchancer;
 
@@ -55,18 +55,19 @@ public class BallForce : MonoBehaviour
         }
 
         if (ballVelocity < 2)
-        {
+        {            
             float distanceToClosestPlayer = (Vector2.Distance(transform.position, redPlayer.position) - Vector2.Distance(transform.position, bluePlayer.position));
-            
+
             if (distanceToClosestPlayer < 0)
             {
                 ballRb.AddForce(Vector2.left, ForceMode2D.Force);
             }
-            else
+
+            if (distanceToClosestPlayer > 0)
             {
                 ballRb.AddForce(Vector2.right, ForceMode2D.Force);
             }
-            
+
         }
 
 
@@ -86,8 +87,8 @@ public class BallForce : MonoBehaviour
 
             PlayerMovement playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
             bounceEffect = ((playerMovement.diffAngle / 90) * swingEnchancer) * (distancePointPivot * leverageEnchancer);
-                        
-            gamebrain.lastHit = contactObject;
+
+            powerUpActivation.lastHit = contactObject;
 
         }
 

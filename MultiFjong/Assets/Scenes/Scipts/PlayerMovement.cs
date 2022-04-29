@@ -68,6 +68,11 @@ public class PlayerMovement : MonoBehaviour
             playerRb.position += Vector2.up * inputY * speed * Time.deltaTime;
         }
 
+        if (inputY == 0)
+        {
+            playerRb.velocity = Vector2.zero;
+        }
+
         playerRb.rotation = playerPadAngle;
 
     }

@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class OnPowerUpPickUp : MonoBehaviour
 {
-    GameBrain gamebrain;
+    PowerUpActivation powerUpActivation;
     public string powerupName;
 
     private void Start()
     {
-        gamebrain = GameObject.FindGameObjectWithTag("GameBrain").GetComponent<GameBrain>();
+        powerUpActivation = GameObject.FindGameObjectWithTag("GameBrain").GetComponent<PowerUpActivation>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Ball")
         {
-            gamebrain.OnPowerupPickup(powerupName);
+            powerUpActivation.OnPowerupPickup(powerupName);
             Destroy(gameObject);
         }
     }

@@ -17,6 +17,8 @@ public class PowerUpActivation : MonoBehaviour
     public Image redPowerup;
     public PowerUpInstantiate powerupInstantiate;
     public TrailRenderer ballTrail;
+    public GameObject redSuckEffect;
+    public GameObject blueSuckEffect;
 
     GameObject playerWithPowerup;
     int superAimPhase;
@@ -34,7 +36,8 @@ public class PowerUpActivation : MonoBehaviour
 
                 if (gameBrainStorage.blueReadyPowerup == "SuperAim")
                 {
-                    StartCoroutine(collisionProxy.CollisionChecker(bluePlayer));                    
+                    StartCoroutine(collisionProxy.CollisionChecker(bluePlayer));
+                    gameBrainStorage.blueHasPowerup = false;
                 }
             }
 
@@ -52,7 +55,9 @@ public class PowerUpActivation : MonoBehaviour
 
                 if (gameBrainStorage.redReadyPowerup == "SuperAim")
                 {
-                    StartCoroutine(collisionProxy.CollisionChecker(redPlayer));                    
+                    StartCoroutine(collisionProxy.CollisionChecker(redPlayer));
+                    gameBrainStorage.redHasPowerup = false;
+
                 }
             }
 
@@ -66,7 +71,7 @@ public class PowerUpActivation : MonoBehaviour
     {
         StartCoroutine(PowerupTimer(6f, player));
         playerWithPowerup = player;
-        player.transform.localScale = new Vector3(1f, 2, 1);
+        player.transform.localScale = new Vector3(2, 2, 1);
         PlayerMovement playermovement = player.GetComponent<PlayerMovement>();
         playermovement.yMovementCap = 0.7f;
     }
@@ -77,9 +82,10 @@ public class PowerUpActivation : MonoBehaviour
         ball.transform.SetParent(player.transform, false);
         ball.transform.localRotation = Quaternion.Euler(Vector3.zero);
         ball.transform.localPosition = new Vector2(1, -0.5f);
-        SpriteRenderer superAimAim = player.transform.GetChild(4).GetComponent<SpriteRenderer>();
+        SpriteRenderer superAimAim = player.transform.Find("SuperAimAim").GetComponent<SpriteRenderer>();
+        GameObject suckEffect = player.transform.Find("SuckEffect").gameObject;
+        suckEffect.SetActive(false);
         superAimAim.enabled = true;
-
 
         bool done = false;
 
@@ -116,11 +122,11 @@ public class PowerUpActivation : MonoBehaviour
         PlayerMovement playermovement = player.GetComponent<PlayerMovement>();
         playermovement.yMovementCap = 2.2f;
         ball.transform.parent = null;
-        SpriteRenderer superAimAim = player.transform.GetChild(4).GetComponent<SpriteRenderer>();
+        SpriteRenderer superAimAim = player.transform.Find("SuperAimAim").GetComponent<SpriteRenderer>();
         superAimAim.enabled = false;
         powerupInstantiate.powerupOnfield = false;
         ballTrail.startColor = Color.green;
-        ballTrail.endColor = new Color(0, 0, 0, 1);
+        ballTrail.endColor = new Color(1, 1, 1, 1);
 
         if (player == bluePlayer)
         {

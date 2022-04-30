@@ -19,6 +19,8 @@ public class CollisionProxy : MonoBehaviour
             while (redCollisionHit == false)
             {
                 print("waiting to hit RED player");
+                GameObject suckEffect = player.transform.Find("SuckEffect").gameObject;
+                suckEffect.SetActive(true);
                 yield return null;
             }            
         }
@@ -28,6 +30,8 @@ public class CollisionProxy : MonoBehaviour
             while (blueCollisionHit == false)
             {
                 print("waiting to hit BLUE player");
+                GameObject suckEffect = player.transform.Find("SuckEffect").gameObject;
+                suckEffect.SetActive(true);
                 yield return null;
             }
 

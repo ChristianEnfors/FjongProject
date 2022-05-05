@@ -6322,7 +6322,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ea69cb96668fc43a298f2d97c5ebb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comment: 
+  comment: '* Make new scrip with each powerup.
+
+    * Put that on both players.
+
+    *
+    In the end of the scrpit, do the reset that is needed and then reset the player.state()
+    informationen.'
 --- !u!114 &429161811
 MonoBehaviour:
   m_ObjectHideFlags: 0

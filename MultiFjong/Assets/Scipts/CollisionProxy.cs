@@ -12,7 +12,7 @@ public class CollisionProxy : MonoBehaviour
     bool blueCollisionHit;
     bool redCollisionHit;    
 
-    public IEnumerator CollisionChecker(GameObject player)
+    public IEnumerator CollisionChecker(Player player)
     {   
         if(player == redPlayer)
         {

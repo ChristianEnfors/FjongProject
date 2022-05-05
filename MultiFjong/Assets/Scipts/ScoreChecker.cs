@@ -10,12 +10,12 @@ public class ScoreChecker : MonoBehaviour
     {
         if (collision.name == "BlueScoreZone")
         {
-            gameBrain.PlayerScored("Blue");
+            gameBrain.playerBlue.Scored();
         }
 
         if(collision.name == "RedScoreZone")
         {
-            gameBrain.PlayerScored("Red");
+            gameBrain.playerRed.Scored();
         }
     }
 

@@ -84,11 +84,12 @@ public class BallForce : MonoBehaviour
             contactObject = collision.gameObject;
 
             float distancePointPivot = Vector2.Distance(contactPoint, contactObject.transform.position);
+            Player player = contactObject.GetComponent<Player>();            
+            
+            bounceEffect = ((player.movement.diffAngle / 90) * swingEnchancer) * (distancePointPivot * leverageEnchancer);
 
-            PlayerMovement playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
-            bounceEffect = ((playerMovement.diffAngle / 90) * swingEnchancer) * (distancePointPivot * leverageEnchancer);
-
-            powerUpActivation.lastHit = contactObject;
+            powerUpActivation.lastHit = player;
+            
 
         }
 

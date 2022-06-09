@@ -12,7 +12,9 @@ public class Player : MonoBehaviour
 
     public PlayerState state;
     public PlayerMovement movement;
-    public SpriteRenderer superAimSpriterenderer;
+    public SpriteRenderer superAimSpriteRenderer;
+    public PowerUpEnlarge powerUpEnlarge;
+    public PowerUpSuperaim powerUpSuperaim;
 
     public System.Action<Player> OnScored;
 

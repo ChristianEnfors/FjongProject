@@ -37,7 +37,7 @@ public class CollisionProxy : MonoBehaviour
 
         }
 
-        StartCoroutine(powerupActivation.PowerupSuperAim(player));
+        //StartCoroutine(powerupActivation.PowerupSuperAim(player));
 
     }
 

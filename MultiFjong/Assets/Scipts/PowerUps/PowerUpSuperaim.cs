@@ -1,102 +1,80 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class PowerUpSuperaim : MonoBehaviour
 {
-
-    public Player player;
-    public Rigidbody2D ballRB;
-    public GameObject ball;
-    public TrailRenderer ballTrail;
-    public PowerUpInstantiate powerupInstantiate;
-    public SpriteRenderer superAimArrow;
-    public GameObject suckEffect;
-
-    public int phase;
-
-    public IEnumerator Superaim(Player player)
-    {
-        player.state.PowerupReset();
-        print("Phase 0");
-
-        if (phase == 0)
+    private bool ballLocked;
+    private Coroutine coroutine;    
+    public SpriteRenderer aimArrow;
+    public string shootButton;
+    
+    public void Superaim()
+    {        
+        // stop the currently running coroutine (if exists)
+        if (coroutine != null)
         {
-            phase = 1;
-            print("Phase 1");
+            StopCoroutine(coroutine);
         }
 
-        while (phase == 3)
+        // kick off the coroutine (this MonoBehaviour will be running the coroutine)
+        coroutine = StartCoroutine(SuperAimCoroutine());
+    }
+
+    private IEnumerator SuperAimCoroutine()
+    {
+        // clear has ball flag
+        ballLocked = false;
+
+        // step 1: wait for ball collision in order to glue it to the paddle
+        while(true)
         {
-            ball.transform.SetParent(player.transform, false);
-            ball.transform.localRotation = Quaternion.Euler(Vector3.zero);
-            ball.transform.localPosition = new Vector2(1, -0.5f);
-            suckEffect.SetActive(false);
-            superAimArrow.enabled = true;
-
-            print("Phase 3");
-
-            while (phase == 3)
+            if(ballLocked)
             {
-                if (Input.GetAxisRaw(player.name.Remove(0, 7) + " PowerUp Activation") > 0.5f)
-                {
-                    phase = 4;
-                    print("Phase 4");
-                    ResetPowerup();
-                }
-
-                yield return null;
+                break;
             }
-
+            print("Waiting for ball to hit pad");
             yield return null;
         }
 
-        yield return null;
-
-
-    }
+        // TODO: show arrow
+        aimArrow.enabled = true;
 
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (phase == 1 && collision.gameObject.tag == "Ball")
+        // step 2: hold the ball
+        while (true)
         {
-            phase = 2;
-            print("Phase 2");
-        }
-    }
+            yield return new WaitForFixedUpdate();  // wait for end of fixed update (basically converting this loop to a physics loop)
 
-    public void ResetPowerup()
-    {
-        ball.transform.parent = null;
-        player.superAimSpriteRenderer.enabled = false;
-        powerupInstantiate.powerupOnfield = false;
-        ballTrail.startColor = Color.green;
-        ballTrail.endColor = new Color(1, 1, 1, 1);
-
-    }
+            // TODO: hold the ball in this simulated physics update
 
 
 
-    public void FixedUpdate()
-    {
-        if (phase == 2)
-        {
-            ballRB.velocity = Vector2.zero;
-            ballRB.simulated = false;
-            phase = 3;            
+            // wait until player presses shoot button
+            if (Input.GetAxisRaw(shootButton) > 0.5f)
+            {
+                print("Shoot!");
+                break;
+            }
         }
 
-        if (phase == 4)
-        {
-            ballRB.simulated = true;
-            ballRB.AddRelativeForce(new Vector2(8, 0), ForceMode2D.Impulse);
-            ballTrail.startColor = Color.red;
-            ballTrail.endColor = new Color(1, 0.6f, 0);
-            phase = 0;
-        }
+        // step 3: shoot ball
+        // TODO: shoot ball
+
+
+        // clear reference to coroutine instead of waiting for memory to be cleared
+        coroutine = null;
     }
 
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        //if (ballLocked == true) return;
+        print("Hit something");
+        // we collide with ball
+        if (ballLocked == false && collision.gameObject.CompareTag("Ball"))
+        {
+            ballLocked = true;
+            print("Ball shoud be locked now");
+        }
+    }
 }

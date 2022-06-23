@@ -321,8 +321,8 @@ GameObject:
   - component: {fileID: 73368009}
   - component: {fileID: 73368010}
   - component: {fileID: 73368012}
-  - component: {fileID: 73368013}
   - component: {fileID: 73368014}
+  - component: {fileID: 73368013}
   - component: {fileID: 73368011}
   - component: {fileID: 73368015}
   - component: {fileID: 73368016}
@@ -479,16 +479,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 73368008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0e4139c188b85e4a9e8951582842fef, type: 3}
+  m_Script: {fileID: 11500000, guid: a9c4d59ab0612f449ac73343b5b80c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 73368014}
-  ballRB: {fileID: 2069705064}
-  ball: {fileID: 2069705063}
-  ballTrail: {fileID: 2069705071}
-  powerupInstantiate: {fileID: 429161811}
-  superAimArrow: {fileID: 1412530782}
-  suckEffect: {fileID: 371544289}
+  aimArrow: {fileID: 1412530782}
+  shootButton: Red PowerUp Activation
 --- !u!1 &107938114
 GameObject:
   m_ObjectHideFlags: 0
@@ -6359,13 +6354,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ea69cb96668fc43a298f2d97c5ebb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comment: '* Make new scrip with each powerup.
-
-    * Put that on both players.
-
-    *
-    In the end of the scrpit, do the reset that is needed and then reset the player.state()
-    informationen.'
+  comment: Cant make the OnColliosn run on SuperAim. Code is not running due to earlier
+    loops?
 --- !u!114 &429161811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6667,8 +6657,8 @@ GameObject:
   - component: {fileID: 563450262}
   - component: {fileID: 563450260}
   - component: {fileID: 563450259}
-  - component: {fileID: 563450258}
   - component: {fileID: 563450261}
+  - component: {fileID: 563450258}
   - component: {fileID: 563450257}
   - component: {fileID: 563450263}
   - component: {fileID: 563450264}
@@ -6825,16 +6815,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 563450256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0e4139c188b85e4a9e8951582842fef, type: 3}
+  m_Script: {fileID: 11500000, guid: a9c4d59ab0612f449ac73343b5b80c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 563450261}
-  ballRB: {fileID: 2069705064}
-  ball: {fileID: 2069705063}
-  ballTrail: {fileID: 2069705071}
-  powerupInstantiate: {fileID: 429161811}
-  superAimArrow: {fileID: 869816606}
-  suckEffect: {fileID: 2049969330}
+  aimArrow: {fileID: 869816606}
+  shootButton: Blue PowerUp Activation
 --- !u!1 &570904987
 GameObject:
   m_ObjectHideFlags: 0

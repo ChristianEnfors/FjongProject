@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 7f;
     public string verticalStickName;
-    public string horizontalStickName;
+    public string horizontalStickName;    
     public float rotationSpeed = 10;
 
     public float yMovementCap = 2.2f;

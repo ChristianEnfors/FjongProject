@@ -16,18 +16,15 @@ public class PowerUpActivation : MonoBehaviour
     public TrailRenderer ballTrail;
     public GameObject redSuckEffect;
     public GameObject blueSuckEffect;
-
-    Player playerWithPowerup;
-    int superAimPhase;
-
+            
     void Update()
     {
-        if (Input.GetAxisRaw("Blue PowerUp Activation") > 0.5)
+        if (Input.GetAxisRaw("Blue PowerUp Activation") == 1)
         {
             ActivatePowerup(bluePlayer);
         }
 
-        if (Input.GetAxisRaw("Red PowerUp Activation") > 0.5)
+        if (Input.GetAxisRaw("Red PowerUp Activation") == 1)
         {
             ActivatePowerup(redPlayer);
         }
@@ -39,13 +36,14 @@ public class PowerUpActivation : MonoBehaviour
         {
             if (player.state.ReadyPowerup == "Enlarge")
             {
+                player.state.PowerupReset();
                 player.powerUpEnlarge.Enlarge(player);
             }
 
             if (player.state.ReadyPowerup == "SuperAim")
             {
-                StartCoroutine(player.powerUpSuperaim.Superaim(player));
-
+                player.state.PowerupReset();
+                player.powerUpSuperaim.Superaim();
             }
         }
     }

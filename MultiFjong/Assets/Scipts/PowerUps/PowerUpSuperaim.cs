@@ -66,7 +66,7 @@ public class PowerUpSuperaim : MonoBehaviour
         coroutine = null;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         //if (ballLocked == true) return;
         print("Hit something");
@@ -76,5 +76,5 @@ public class PowerUpSuperaim : MonoBehaviour
             ballLocked = true;
             print("Ball shoud be locked now");
         }
-    }
+    }      
 }

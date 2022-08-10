@@ -484,6 +484,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimArrow: {fileID: 1412530782}
   shootButton: Red PowerUp Activation
+  ball: {fileID: 2069705063}
+  ballRB: {fileID: 2069705064}
+  suckEffect: {fileID: 371544289}
 --- !u!1 &107938114
 GameObject:
   m_ObjectHideFlags: 0
@@ -6820,6 +6823,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimArrow: {fileID: 869816606}
   shootButton: Blue PowerUp Activation
+  ball: {fileID: 2069705063}
+  ballRB: {fileID: 2069705064}
+  suckEffect: {fileID: 2049969330}
 --- !u!1 &570904987
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,10 +3,13 @@ using System.Collections;
 
 public class PowerUpSuperaim : MonoBehaviour
 {
-    private bool ballLocked;
+    private bool ballLocked;    
     private Coroutine coroutine;    
     public SpriteRenderer aimArrow;
     public string shootButton;
+    public GameObject ball;
+    public Rigidbody2D ballRB;
+    public GameObject suckEffect;
     
     public void Superaim()
     {        
@@ -23,7 +26,7 @@ public class PowerUpSuperaim : MonoBehaviour
     private IEnumerator SuperAimCoroutine()
     {
         // clear has ball flag
-        ballLocked = false;
+        ballLocked = false;              
 
         // step 1: wait for ball collision in order to glue it to the paddle
         while(true)
@@ -33,6 +36,7 @@ public class PowerUpSuperaim : MonoBehaviour
                 break;
             }
             print("Waiting for ball to hit pad");
+            suckEffect.SetActive(true);
             yield return null;
         }
 
@@ -47,8 +51,14 @@ public class PowerUpSuperaim : MonoBehaviour
             yield return new WaitForFixedUpdate();  // wait for end of fixed update (basically converting this loop to a physics loop)
 
             // TODO: hold the ball in this simulated physics update
+            suckEffect.SetActive(false);
+            ball.transform.SetParent(this.transform);            
+            ballRB.velocity = new Vector2(0, 0);
+            ballRB.isKinematic = true;
 
 
+
+            print("Ball shoud be locked now");
 
             // wait until player presses shoot button
             if (Input.GetAxisRaw(shootButton) > 0.5f)
@@ -67,14 +77,12 @@ public class PowerUpSuperaim : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collision)
-    {
-        //if (ballLocked == true) return;
-        print("Hit something");
+    {                      
         // we collide with ball
         if (ballLocked == false && collision.gameObject.CompareTag("Ball"))
         {
             ballLocked = true;
-            print("Ball shoud be locked now");
+                       
         }
     }      
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerState : MonoBehaviour
 {
@@ -9,7 +10,32 @@ public class PlayerState : MonoBehaviour
     public bool HasPowerup;
     public string ReadyPowerup;
     public Image powerupImage;
+    public GameObject wonUI;
+    public GameObject endgamePanel;
+    public TextMeshProUGUI scoreUI;
+    public GameBrain gamebrain;
+    public Player player;
+        
 
+    public void Scored()
+    {
+        Score++;
+        scoreUI.text = Score.ToString();
+
+        if (Score < 5)
+        {
+            gamebrain.RestartRound();
+        }
+
+        else gamebrain.GameOver(player);
+
+    }
+    
+    public void GameOver()
+   {
+       endgamePanel.SetActive(true);
+       wonUI.SetActive(true);
+   }
 
     public void PowerupReset()
     {
@@ -32,7 +58,16 @@ public class PlayerState : MonoBehaviour
         {
             powerupImage.color = Color.red;
         }
-    } 
-    
+    }
+
+    public void OnReset()
+    {
+        Score = 0;
+        scoreUI.text = Score.ToString();
+
+        endgamePanel.SetActive(false);
+        wonUI.SetActive(false);
+    }
+
 
 }

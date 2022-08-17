@@ -8,14 +8,10 @@ public class PowerUpActivation : MonoBehaviour
 {
     public Player redPlayer;
     public Player bluePlayer;
-    public GameObject ball;
-    public Rigidbody2D ballRB;
-    public CollisionProxy collisionProxy;
+    public GameObject ball;    
     public Player lastHit;
     public PowerUpInstantiate powerupInstantiate;
-    public TrailRenderer ballTrail;
-    public GameObject redSuckEffect;
-    public GameObject blueSuckEffect;
+    public TrailRenderer ballTrail;    
             
     void Update()
     {
@@ -66,7 +62,7 @@ public class PowerUpActivation : MonoBehaviour
     {
         player.transform.localScale = new Vector3(1, 1, 1);
         player.movement.yMovementCap = 2.2f;
-        ball.transform.parent = null;
+        ball.transform.SetParent(null);
         player.superAimSpriteRenderer.enabled = false;
         powerupInstantiate.powerupOnfield = false;
         ballTrail.startColor = Color.green;

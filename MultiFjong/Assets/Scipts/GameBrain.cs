@@ -13,16 +13,15 @@ public class GameBrain : MonoBehaviour
     public Player playerRed;
     public GameObject lastHit;
 
-
     private void Awake()
     {
-        playerBlue.OnScored += OnScored;
-        playerRed.OnScored += OnScored;
+        //playerBlue.OnScored += OnScored;
+        //playerRed.OnScored += OnScored;
     }
 
-    private void OnScored(Player player)
+    public void OnScored(Player player)
     {
-        if (player.state.Score < 10)
+        if (player.state.Score < 5)
         {
             RestartRound();
         }
@@ -39,20 +38,20 @@ public class GameBrain : MonoBehaviour
 
     public void GameOver(Player player)
     {
-        player.GameOver();
-
+        player.state.GameOver();
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             RestartGame();
         }
+
     }
 
     public void RestartGame()
     {
-        playerBlue.OnReset();
-        playerRed.OnReset();
+        playerBlue.state.OnReset();
+        playerRed.state.OnReset();
 
         RestartRound();
-    }    
+    }
 }

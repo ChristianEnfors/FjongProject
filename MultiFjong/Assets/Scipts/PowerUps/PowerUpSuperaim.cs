@@ -3,16 +3,18 @@ using System.Collections;
 
 public class PowerUpSuperaim : MonoBehaviour
 {
-    private bool ballLocked;    
-    private Coroutine coroutine;    
+    private bool ballCollided;
+    private Coroutine coroutine;
     public SpriteRenderer aimArrow;
     public string shootButton;
     public GameObject ball;
     public Rigidbody2D ballRB;
     public GameObject suckEffect;
-    
+    public GameObject aimArrowGO;
+    public Player player;
+
     public void Superaim()
-    {        
+    {
         // stop the currently running coroutine (if exists)
         if (coroutine != null)
         {
@@ -26,15 +28,11 @@ public class PowerUpSuperaim : MonoBehaviour
     private IEnumerator SuperAimCoroutine()
     {
         // clear has ball flag
-        ballLocked = false;              
+        ballCollided = false;
 
         // step 1: wait for ball collision in order to glue it to the paddle
-        while(true)
+        while (!ballCollided)
         {
-            if(ballLocked)
-            {
-                break;
-            }
             print("Waiting for ball to hit pad");
             suckEffect.SetActive(true);
             yield return null;
@@ -52,37 +50,42 @@ public class PowerUpSuperaim : MonoBehaviour
 
             // TODO: hold the ball in this simulated physics update
             suckEffect.SetActive(false);
-            ball.transform.SetParent(this.transform);            
+            ball.transform.SetParent(aimArrowGO.transform);
             ballRB.velocity = new Vector2(0, 0);
-            ballRB.isKinematic = true;
-
-
+            ballRB.simulated = false;
+            ball.transform.localPosition = new Vector2(0.8f, 0f);
+            ball.transform.localRotation = Quaternion.identity;
 
             print("Ball shoud be locked now");
 
+            break;
+        }
+
+        while (true)
+        {
             // wait until player presses shoot button
             if (Input.GetAxisRaw(shootButton) > 0.5f)
             {
-                print("Shoot!");
+                yield return new WaitForFixedUpdate();
+                ball.transform.SetParent(null);
+                aimArrow.enabled = false;
+                ballRB.simulated = true;
+                ballRB.AddRelativeForce(new Vector2(5, 0), ForceMode2D.Impulse);
                 break;
             }
+            yield return null;
         }
-
-        // step 3: shoot ball
-        // TODO: shoot ball
-
-
         // clear reference to coroutine instead of waiting for memory to be cleared
         coroutine = null;
+        player.state.PowerupReset();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
-    {                      
+    {
         // we collide with ball
-        if (ballLocked == false && collision.gameObject.CompareTag("Ball"))
+        if (ballCollided == false && collision.gameObject.CompareTag("Ball"))
         {
-            ballLocked = true;
-                       
+            ballCollided = true;
         }
-    }      
+    }
 }

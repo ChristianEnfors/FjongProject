@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ScoreChecker : MonoBehaviour
-{
-    public GameBrain gameBrain;
-        
+{    
+    public Player bluePlayer;
+    public Player redPlayer;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name == "BlueScoreZone")
         {
-            gameBrain.playerBlue.Scored();
+            bluePlayer.state.Scored();
         }
 
         if(collision.name == "RedScoreZone")
         {
-            gameBrain.playerRed.Scored();
+            redPlayer.state.Scored();
         }
     }
 

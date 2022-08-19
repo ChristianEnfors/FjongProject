@@ -6,6 +6,8 @@ public class PowerUpEnlarge : MonoBehaviour
 {
     public Player player;
     public PowerUpInstantiate powerupInstantiate;
+    public PowerUpActivation powerupActivation;
+
 
 
     public void Enlarge(Player player)
@@ -30,6 +32,7 @@ public class PowerUpEnlarge : MonoBehaviour
         powerupInstantiate.powerupOnfield = false;
 
         player.state.PowerupReset();
+        powerupActivation.PowerupResetEffects(player);
     }
    
 }

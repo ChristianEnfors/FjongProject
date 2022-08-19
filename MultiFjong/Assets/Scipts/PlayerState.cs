@@ -8,7 +8,7 @@ public class PlayerState : MonoBehaviour
 {
     public int Score = 0;    
     public bool HasPowerup;
-    public string ReadyPowerup;
+    public string readyPowerup;
     public Image powerupImage;
     public GameObject wonUI;
     public GameObject endgamePanel;
@@ -40,14 +40,14 @@ public class PlayerState : MonoBehaviour
     public void PowerupReset()
     {
         HasPowerup = false;
-        ReadyPowerup = null;
+        readyPowerup = null;
         powerupImage.color = Color.white;
     }
 
     public void PowerupPickup(string powerup)
     {
         HasPowerup = true;
-        ReadyPowerup = powerup;
+        readyPowerup = powerup;
 
         if (powerup == "Enlarge")
         {
@@ -57,6 +57,10 @@ public class PlayerState : MonoBehaviour
         if (powerup == "SuperAim")
         {
             powerupImage.color = Color.red;
+        }
+        if (powerup == "Rocket")
+        {
+            powerupImage.color = Color.blue;
         }
     }
 

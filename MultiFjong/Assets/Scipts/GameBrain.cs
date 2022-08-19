@@ -13,12 +13,6 @@ public class GameBrain : MonoBehaviour
     public Player playerRed;
     public GameObject lastHit;
 
-    private void Awake()
-    {
-        //playerBlue.OnScored += OnScored;
-        //playerRed.OnScored += OnScored;
-    }
-
     public void OnScored(Player player)
     {
         if (player.state.Score < 5)
@@ -33,6 +27,16 @@ public class GameBrain : MonoBehaviour
     {
         ball.position = new Vector3(0, 0, 0);
         ballforce.roundRestarted = true;
+
+        if(playerBlue.gameObject.activeInHierarchy == false)
+        {
+            playerBlue.gameObject.SetActive(true);
+        }
+
+        if (playerRed.gameObject.activeInHierarchy == false)
+        {
+            playerRed.gameObject.SetActive(true);
+        }
     }
 
 

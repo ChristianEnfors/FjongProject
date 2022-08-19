@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public PlayerMovement movement;
     public SpriteRenderer superAimSpriteRenderer;
     public PowerUpEnlarge powerUpEnlarge;
-    public PowerUpSuperaim powerUpSuperaim;       
+    public PowerUpSuperaim powerUpSuperaim;
+    public PowerUpRocket powerUpRocket;
 }
 

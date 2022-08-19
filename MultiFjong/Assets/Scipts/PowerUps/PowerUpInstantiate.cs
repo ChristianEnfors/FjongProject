@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUpInstantiate : MonoBehaviour
 {
     public GameObject[] powerups;
-    float currTime;
+    public float currTime;
     public bool powerupOnfield = false;
 
     void Update()

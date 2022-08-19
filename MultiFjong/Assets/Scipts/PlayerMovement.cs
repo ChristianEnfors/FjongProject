@@ -74,6 +74,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         playerRb.rotation = playerPadAngle;
-
+                
     }
 }

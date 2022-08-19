@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 73368011}
   - component: {fileID: 73368015}
   - component: {fileID: 73368016}
+  - component: {fileID: 73368017}
   m_Layer: 0
   m_Name: Player Red
   m_TagString: Player
@@ -350,6 +351,7 @@ Transform:
   - {fileID: 709455500}
   - {fileID: 1412530781}
   - {fileID: 371544290}
+  - {fileID: 275147006}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -393,7 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Score: 0
   HasPowerup: 0
-  ReadyPowerup: 
+  readyPowerup: 
   powerupImage: {fileID: 654436103}
   wonUI: {fileID: 968391217}
   endgamePanel: {fileID: 59051465}
@@ -459,6 +461,7 @@ MonoBehaviour:
   superAimSpriteRenderer: {fileID: 1412530782}
   powerUpEnlarge: {fileID: 73368015}
   powerUpSuperaim: {fileID: 73368016}
+  powerUpRocket: {fileID: 73368017}
 --- !u!114 &73368015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,6 +476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 73368014}
   powerupInstantiate: {fileID: 429161811}
+  powerupActivation: {fileID: 429161809}
 --- !u!114 &73368016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,6 +496,26 @@ MonoBehaviour:
   suckEffect: {fileID: 371544289}
   aimArrowGO: {fileID: 1412530780}
   player: {fileID: 73368014}
+  powerupActivation: {fileID: 429161809}
+--- !u!114 &73368017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73368008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d52d6b20f64ca4096737783c3f4144, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rocketAim: {fileID: 275147005}
+  linerenderer: {fileID: 275147007}
+  shootButton: Red PowerUp Activation
+  rocketPrefab: {fileID: 6193606240775215777, guid: 620ff089d5bf2bd428fe17c238f33243, type: 3}
+  rocketSpawnPos: {fileID: 130427145}
+  player: {fileID: 73368014}
+  powerupActivation: {fileID: 429161809}
 --- !u!1 &107938114
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +759,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116634727}
   m_CullTransparentMesh: 1
+--- !u!1 &130427144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 130427145}
+  m_Layer: 0
+  m_Name: 'RocketSpawnPos '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &130427145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130427144}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 275147006}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &218331214
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,6 +1007,136 @@ Transform:
   m_Father: {fileID: 1751125861}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &275147005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 275147006}
+  - component: {fileID: 275147007}
+  m_Layer: 0
+  m_Name: RocketlAim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &275147006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275147005}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -1.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 130427145}
+  m_Father: {fileID: 73368009}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!120 &275147007
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275147005}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 5, y: 0, z: 1}
+  m_Parameters:
+    serializedVersion: 3
+    widthMultiplier: 1
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.038909912
+        value: 0.016878128
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 0, b: 0, a: 1}
+      key2: {r: 1, g: 1, b: 1, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 65535
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 1
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 0
+    textureMode: 0
+    shadowBias: 0.5
+    generateLightingData: 0
+  m_UseWorldSpace: 1
+  m_Loop: 0
 --- !u!1 &278102102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,6 +1548,136 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &363117866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 363117867}
+  - component: {fileID: 363117868}
+  m_Layer: 0
+  m_Name: RocketAim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &363117867
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363117866}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -1.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2038495253}
+  m_Father: {fileID: 563450262}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!120 &363117868
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363117866}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 5, y: 0, z: 1}
+  m_Parameters:
+    serializedVersion: 3
+    widthMultiplier: 1
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.038909912
+        value: 0.016878128
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 0, b: 0, a: 1}
+      key2: {r: 1, g: 1, b: 1, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 65535
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 1
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 0
+    textureMode: 0
+    shadowBias: 0.5
+    generateLightingData: 0
+  m_UseWorldSpace: 1
+  m_Loop: 0
 --- !u!1 &371544289
 GameObject:
   m_ObjectHideFlags: 0
@@ -1535,7 +1849,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -6341,12 +6655,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ea69cb96668fc43a298f2d97c5ebb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comment: 'Shortcuts:
-
-    shift + F12 = Hitta referenser till en funtion/class
-
-    CTRL
-    + K + D = Autoformatera script'
+  comment: "Shortcuts:\nshift + F12 = Hitta referenser till en funtion/class\nCTRL
+    + K + D = Autoformatera script\nCTRL + SHIFT + SPACE = Visa intelliSense n\xE4r
+    mark\xF6ren \xE4r vid saken."
 --- !u!114 &429161809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6364,7 +6675,6 @@ MonoBehaviour:
   ball: {fileID: 2069705063}
   lastHit: {fileID: 0}
   powerupInstantiate: {fileID: 429161811}
-  ballTrail: {fileID: 2069705071}
 --- !u!114 &429161810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6377,8 +6687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ea69cb96668fc43a298f2d97c5ebb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comment: Cant make the OnColliosn run on SuperAim. Code is not running due to earlier
-    loops?
+  comment: 'TODO:'
 --- !u!114 &429161811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6394,6 +6703,8 @@ MonoBehaviour:
   powerups:
   - {fileID: 7727989901890193173, guid: 6adcab18bc326a5409e96cc11b5123c4, type: 3}
   - {fileID: 7727989901890193173, guid: 9b274afa6df7a644ab447405d8c3a6de, type: 3}
+  - {fileID: 7727989901890193173, guid: 607f5597133bb524f8af677b2dadcea9, type: 3}
+  currTime: 0
   powerupOnfield: 0
 --- !u!1 &492410322
 GameObject:
@@ -6685,6 +6996,7 @@ GameObject:
   - component: {fileID: 563450257}
   - component: {fileID: 563450263}
   - component: {fileID: 563450264}
+  - component: {fileID: 563450265}
   m_Layer: 0
   m_Name: Player Blue
   m_TagString: Player
@@ -6706,7 +7018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Score: 0
   HasPowerup: 0
-  ReadyPowerup: 
+  readyPowerup: 
   powerupImage: {fileID: 862173675}
   wonUI: {fileID: 1528962049}
   endgamePanel: {fileID: 59051465}
@@ -6798,6 +7110,7 @@ MonoBehaviour:
   superAimSpriteRenderer: {fileID: 869816606}
   powerUpEnlarge: {fileID: 563450263}
   powerUpSuperaim: {fileID: 563450264}
+  powerUpRocket: {fileID: 563450265}
 --- !u!4 &563450262
 Transform:
   m_ObjectHideFlags: 0
@@ -6815,6 +7128,7 @@ Transform:
   - {fileID: 324564383}
   - {fileID: 869816605}
   - {fileID: 2049969331}
+  - {fileID: 363117867}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6832,6 +7146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 563450261}
   powerupInstantiate: {fileID: 429161811}
+  powerupActivation: {fileID: 429161809}
 --- !u!114 &563450264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6851,6 +7166,26 @@ MonoBehaviour:
   suckEffect: {fileID: 2049969330}
   aimArrowGO: {fileID: 869816604}
   player: {fileID: 563450261}
+  powerupActivation: {fileID: 429161809}
+--- !u!114 &563450265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563450256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d52d6b20f64ca4096737783c3f4144, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rocketAim: {fileID: 363117866}
+  linerenderer: {fileID: 363117868}
+  shootButton: Blue PowerUp Activation
+  rocketPrefab: {fileID: 6193606240775215777, guid: 620ff089d5bf2bd428fe17c238f33243, type: 3}
+  rocketSpawnPos: {fileID: 2038495253}
+  player: {fileID: 563450261}
+  powerupActivation: {fileID: 429161809}
 --- !u!1 &570904987
 GameObject:
   m_ObjectHideFlags: 0
@@ -10681,6 +11016,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2038495252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2038495253}
+  m_Layer: 0
+  m_Name: RocketSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2038495253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038495252}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 363117867}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2049969330
 GameObject:
   m_ObjectHideFlags: 0
@@ -10852,7 +11217,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0

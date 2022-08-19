@@ -10,8 +10,7 @@ public class PowerUpActivation : MonoBehaviour
     public Player bluePlayer;
     public GameObject ball;    
     public Player lastHit;
-    public PowerUpInstantiate powerupInstantiate;
-    public TrailRenderer ballTrail;    
+    public PowerUpInstantiate powerupInstantiate;        
             
     void Update()
     {
@@ -30,16 +29,22 @@ public class PowerUpActivation : MonoBehaviour
     {
         if (player.state.HasPowerup)
         {
-            if (player.state.ReadyPowerup == "Enlarge")
+            if (player.state.readyPowerup == "Enlarge")
             {
                 player.state.PowerupReset();
                 player.powerUpEnlarge.Enlarge(player);
             }
 
-            if (player.state.ReadyPowerup == "SuperAim")
+            if (player.state.readyPowerup == "SuperAim")
             {
                 player.state.PowerupReset();
                 player.powerUpSuperaim.Superaim();
+            }
+
+            if(player.state.readyPowerup == "Rocket")
+            {
+                player.state.PowerupReset();
+                player.powerUpRocket.Rocket();
             }
         }
     }
@@ -54,19 +59,17 @@ public class PowerUpActivation : MonoBehaviour
             yield return null;
         }
 
-        PowerupReset(player);
+        PowerupResetEffects(player);
 
     }
 
-    public void PowerupReset(Player player)
+    public void PowerupResetEffects(Player player)
     {
         player.transform.localScale = new Vector3(1, 1, 1);
         player.movement.yMovementCap = 2.2f;
         ball.transform.SetParent(null);
         player.superAimSpriteRenderer.enabled = false;
-        powerupInstantiate.powerupOnfield = false;
-        ballTrail.startColor = Color.green;
-        ballTrail.endColor = new Color(1, 1, 1, 1);
+        powerupInstantiate.powerupOnfield = false;       
 
         player.state.PowerupReset();
 
